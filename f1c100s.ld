@@ -28,11 +28,12 @@ SECTIONS
 		build/machine/sys-uart.o (.text)
 		build/machine/sys-clock.o (.text)
 		build/machine/sys-dram.o (.text)
+		build/machine/sys-mmu.o (.text)
 		build/machine/sys-spi-flash.o (.text)
 		build/machine/sys-copyself.o (.text)
 		PROVIDE(__bootloader_end = .);
 	} > ram
-	
+
 	__bootloader_size = SIZEOF(.bootloader);
 
 	.text :

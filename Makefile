@@ -30,7 +30,19 @@ SRC_C = \
 	machine/sys-uart.c \
 	machine/sys-copyself.c \
 	machine/sys-spi-flash.c \
+	machine/sys-mmu.c \
 	machine/exception.c \
+
+# drivers
+SRC_C += \
+	driver/gpio-f1c100s.c \
+	driver/pwm-f1c100s.c \
+	driver/reset-f1c100s.c \
+	lib/malloc.c \
+	lib/dma.c \
+	driver/clk-f1c100s-pll.c \
+	driver/fb-f1c100s.c \
+
 
 SRC_ASM = machine/start.S \
 		  arch/arm32/lib/memcpy.S \
@@ -50,6 +62,9 @@ LIBDIRS		:=
 LIBS 		:= -lgcc
 INCDIRS		:= -Imachine/include -Iarch/arm32/include
 SRCDIRS		:=
+
+
+INCDIRS		+= -Idriver/include -Ilib
 
 # $(BUILD)/firmware_boot.bin:$(BUILD)/firmware.bin
 # 	./tools/mksunxiboot/mksunxiboot $^ $@
@@ -105,6 +120,7 @@ write:
 	sudo sunxi-fel -p spiflash-write 0 $(BUILD)/firmware.bin
 
 mktool:
+	cd tools/mksunxiboot && make
 	cd tools/mksunxi && make
 
 dump:

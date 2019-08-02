@@ -26,6 +26,7 @@
 extern unsigned char __image_start;
 extern unsigned char __image_end;
 extern void return_to_fel(void);
+extern void sys_mmu_init(void);
 extern void sys_uart_putc(char c);
 extern void sys_spi_flash_init(void);
 extern void sys_spi_flash_exit(void);
@@ -96,6 +97,7 @@ void sys_copyself(void)
 		sys_uart_putc('\n');
 		mem = (void *)&__image_start;
 		size = &__image_end - &__image_start;
+		sys_mmu_init();
 
 		sys_spi_flash_init();
 		sys_spi_flash_read(0, mem, size);

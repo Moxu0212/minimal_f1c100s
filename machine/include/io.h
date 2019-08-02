@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#include <types.h>
+#include <core_types.h>
 
 static inline u8_t read8(virtual_addr_t addr)
 {
